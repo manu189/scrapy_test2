@@ -4,13 +4,11 @@ from scrapy_splash import SplashRequest
 
 class QuotesJsSpider(scrapy.Spider):
     name = 'quotes_js_spider'
-    # allowed_domains = ['quotes.toscrape.com']
     start_urls = ['http://quotes.toscrape.com/js/']
 
     def start_requests(self):
         for url in self.start_urls:
             yield SplashRequest(url, self.parse)
-            # yield SplashRequest(url, self.parse, endpoint='render.html', args={'wait': 0.5})
 
     def parse(self, response):
         for quote in response.css("div.quote"):
